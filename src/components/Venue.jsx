@@ -2,10 +2,9 @@ import { useEffect, useRef } from "react";
 import "./Venue.css";
 import FloralDivider from "./FloralDivider";
 
-const mapUrl =
-  "https://www.google.com/maps/search/?api=1&query=" +
+const mapUrl = "https://maps.app.goo.gl/8nQ1CYW1bJmsJ3NLA" 
   encodeURIComponent(
-    "Green Land Resort, in front of Indian Petrol Pump, Mohaan, Unnao, Uttar Pradesh"
+    "Green Land Resort, in front of Little Feast PreSchool, Mohaan, Unnao, Uttar Pradesh"
   );
 
 /* Adds class "in" the first time the block scrolls into view -> triggers its animations */
@@ -78,7 +77,7 @@ export default function Venue() {
           <span className="pin rv" style={d(".7s")} aria-hidden="true">
             <svg viewBox="0 0 24 32"><path d="M12 1C6 1 1.5 5.6 1.5 11.4 1.5 19 12 31 12 31s10.5-12 10.5-19.6C22.5 5.6 18 1 12 1z" /><circle cx="12" cy="11.5" r="4" /></svg>
           </span>
-          <p className="royal-landmark rv" style={d(".85s")}>In front of Indian Petrol Pump</p>
+          <p className="royal-landmark rv" style={d(".85s")}>In front of Little Feast PreSchool</p>
           <p className="royal-address rv" style={d(".95s")}>
             Mohaan <span>·</span> Unnao <span>·</span> Uttar Pradesh
           </p>

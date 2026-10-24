@@ -12,6 +12,6 @@ export const CFG = {
   weekdayTime: "Friday • 08:00 PM",
   venueName: "Resort",
   venueAddress: "Address will be shared soon",
-  mapUrl: "https://www.google.com/maps/search/?api=1&query=Resort",
-  family: "With love, The Family",
+  mapUrl:
+    "https://maps.app.goo.gl/8nQ1CYW1bJmsJ3NLA"
 };
