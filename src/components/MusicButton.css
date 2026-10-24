@@ -1,0 +1,41 @@
+.music-btn{
+  position:fixed; right:14px; top:calc(env(safe-area-inset-top,0px) + 14px); z-index:60;
+  display:none; place-items:center; width:48px; height:48px; padding:0; border-radius:50%; cursor:pointer;
+  color:#e3c46f; border:1px solid rgba(227,196,111,.75);
+  background:radial-gradient(circle at 35% 30%,#7a1228,#2a0812 75%);
+  box-shadow:0 6px 18px rgba(0,0,0,.45),inset 0 0 12px rgba(227,196,111,.18);
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .25s cubic-bezier(.3,1.4,.4,1),box-shadow .25s,border-color .25s;
+}
+body.open .music-btn{display:grid;animation:mbIn .9s cubic-bezier(.2,.9,.3,1.2) .6s both}
+@keyframes mbIn{from{opacity:0;transform:scale(.3) rotate(-90deg)}to{opacity:1;transform:none}}
+.music-btn:hover{transform:scale(1.08)}
+.music-btn:active{transform:scale(.9)}
+.music-btn:focus-visible{outline:2px solid #f6e3a8;outline-offset:3px}
+
+/* outer dashed ring (spins while playing) */
+.mb-ring{position:absolute;inset:-6px;border-radius:50%;border:1px dashed rgba(227,196,111,.55);opacity:.5;transition:opacity .3s}
+.is-on .mb-ring{opacity:1;animation:mbSpin 10s linear infinite}
+@keyframes mbSpin{to{transform:rotate(360deg)}}
+
+/* soft pulse while playing */
+.is-on::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(227,196,111,.6);animation:mbPulse 2s ease-out infinite;pointer-events:none}
+@keyframes mbPulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
+.is-on{border-color:#f6e3a8;box-shadow:0 6px 20px rgba(0,0,0,.45),0 0 18px rgba(227,196,111,.45),inset 0 0 12px rgba(227,196,111,.25)}
+
+/* OFF icon */
+.mb-off{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.mb-off circle{fill:currentColor;stroke:none}
+.mb-slash{stroke:#ff8a99;stroke-width:2}
+
+/* ON icon: equalizer */
+.mb-eq{display:flex;align-items:center;gap:3px;height:20px}
+.mb-eq i{display:block;width:3px;height:100%;border-radius:2px;background:linear-gradient(#f6e3a8,#b8924f);transform-origin:50% 100%;animation:mbBar 1s ease-in-out infinite}
+.mb-eq i:nth-child(1){animation-delay:-.2s}.mb-eq i:nth-child(2){animation-delay:-.6s}
+.mb-eq i:nth-child(3){animation-delay:-.4s}.mb-eq i:nth-child(4){animation-delay:-.8s}
+@keyframes mbBar{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+
+@media (prefers-reduced-motion:reduce){
+  .is-on .mb-ring,.is-on::after,.mb-eq i{animation:none}
+  .mb-eq i{transform:scaleY(.7)}
+  body.open .music-btn{animation:none}}

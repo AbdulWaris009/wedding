@@ -1,0 +1,38 @@
+.fd{position:relative;height:var(--fd-h,160px);margin:calc(var(--fd-h,160px)/-2) 0;z-index:6;pointer-events:none}
+.fd-svg{position:absolute;left:50%;top:0;width:min(100%,700px);height:100%;transform:translateX(-50%);overflow:visible;
+  filter:drop-shadow(0 3px 7px rgba(25,5,12,.4)) drop-shadow(0 0 8px rgba(227,196,111,.25))}
+
+/* gold line on the seam */
+.fd-lines{position:absolute;left:0;right:0;top:50%;height:0}
+.fd-lines i{position:absolute;left:5%;right:5%;display:block;transform:scaleX(0);overflow:hidden;
+  background:linear-gradient(90deg,transparent,#b8924f 14%,#f3dc9d 50%,#b8924f 86%,transparent)}
+.fd-lines .main{top:-1px;height:2px}
+.fd-lines .thin{top:5px;height:1px;opacity:.65}
+.fd-lines .main::after{content:"";position:absolute;top:0;bottom:0;width:18%;left:-30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent)}
+.fd.in .fd-lines i{animation:fdLine 2s cubic-bezier(.6,0,.2,1) forwards}
+.fd.in .fd-lines .main::after{animation:fdGlint 5.5s ease-in-out 2.4s infinite}
+@keyframes fdLine{to{transform:scaleX(1)}}
+@keyframes fdGlint{0%{left:-30%}45%,100%{left:130%}}
+
+/* lilies bloom, sprigs grow out + sway */
+.fd-lily{opacity:0;transform-box:fill-box;transform-origin:50% 100%;transform:scale(.25) rotate(-8deg)}
+.fd.in .fd-lily{animation:fdBloom 1.7s cubic-bezier(.2,.9,.25,1.08) var(--d,0s) forwards}
+@keyframes fdBloom{60%{opacity:1}to{opacity:1;transform:none}}
+.fd-back{filter:brightness(.85)}
+.fd-rose{opacity:0;transform-box:fill-box;transform-origin:50% 50%;transform:scale(.2) rotate(-40deg)}
+.fd.in .fd-rose{animation:fdPop 1.1s cubic-bezier(.3,1.35,.4,1) var(--d,1s) forwards}
+@keyframes fdPop{to{opacity:1;transform:none}}
+.fd-sprig{opacity:0;transform-box:fill-box}
+.fd-sprig.l{transform-origin:100% 50%}.fd-sprig.r{transform-origin:0 50%}
+.fd.in .fd-sprig.l{animation:fdGrowL 1.6s cubic-bezier(.2,.8,.2,1) var(--d,.7s) both,fdSway 7s ease-in-out 2.8s infinite alternate}
+.fd.in .fd-sprig.r{animation:fdGrowR 1.6s cubic-bezier(.2,.8,.2,1) var(--d,.7s) both,fdSway 8s ease-in-out 2.8s infinite alternate-reverse}
+@keyframes fdGrowL{from{opacity:0;transform:translateX(70px) scale(.4)}to{opacity:1;transform:none}}
+@keyframes fdGrowR{from{opacity:0;transform:translateX(-70px) scale(.4)}to{opacity:1;transform:none}}
+@keyframes fdSway{from{transform:rotate(-1.4deg)}to{transform:rotate(1.4deg)}}
+
+@media (max-width:480px){.fd-svg{width:130%}}
+@media (prefers-reduced-motion:reduce){
+  .fd-lines i{transform:none!important;animation:none!important}
+  .fd-lily,.fd-sprig,.fd-rose{opacity:1!important;transform:none!important;animation:none!important}
+  .fd-lines .main::after{display:none}
+  .fd-rose{opacity:1!important;transform:none!important;animation:none!important}}

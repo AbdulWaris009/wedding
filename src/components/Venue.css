@@ -1,0 +1,122 @@
+.royal-invite{
+  --wine:#4a0f1f; --wine2:#2a0812; --rose:#8f1d33; --g1:#d9bd7a; --g2:#f6e3a8; --g3:#a67c37;
+  --ivory:#fcf8f0; --ink:#3f1725; --muted:#75666a;
+  position:relative; isolation:isolate; width:100%; overflow:hidden; text-align:center; color:var(--ivory);
+  padding:clamp(46px,7vw,66px) 26px 26px; font-family:"Cormorant Garamond",Georgia,serif;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%,rgba(217,189,122,.22),transparent 70%),
+    radial-gradient(ellipse 70% 30% at 50% 100%,rgba(143,29,51,.55),transparent 70%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 2px,transparent 2px 18px),
+    linear-gradient(180deg,var(--wine),var(--wine2));
+}
+.royal-invite *,.royal-invite *::before,.royal-invite *::after{box-sizing:border-box}
+.royal-invite>*:not(.dust):not(.frame){position:relative;z-index:2}
+
+/* ---- reveal system ---- */
+.rv{opacity:0}
+.in .rv{animation:rise 1.2s cubic-bezier(.2,.8,.2,1) var(--d,0s) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+
+/* ---- gold shimmer text ---- */
+.gold-text{
+  background:linear-gradient(100deg,#a67c37 20%,#f8e9b8 40%,#a67c37 60%,#e2c27c 80%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 10px rgba(0,0,0,.35));
+}
+.in .gold-text{animation:rise 1.2s cubic-bezier(.2,.8,.2,1) var(--d,0s) both,shine 6s linear 1.5s infinite}
+@keyframes shine{to{background-position:-250% 0}}
+
+/* ---- premium animated golden border (around the whole page) ---- */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+.frame{position:absolute;inset:12px;pointer-events:none;z-index:1;--l1:var(--g1);--l2:var(--g2)}
+/* rotating molten-gold ring */
+.frame::before{content:"";position:absolute;inset:0;padding:2.5px;border-radius:3px;opacity:0;clip-path:inset(50% 50% 50% 50%);
+  background:conic-gradient(from var(--ang),#a67c37,#fff2c4 10%,#a67c37 22%,#d9bd7a 40%,#8a6428 55%,#f8e9b8 70%,#a67c37 85%,#a67c37);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  filter:drop-shadow(0 0 6px rgba(217,189,122,.55))}
+/* fine inner line */
+.frame::after{content:"";position:absolute;inset:8px;border:1px solid rgba(217,189,122,.42);opacity:0;clip-path:inset(50% 50% 50% 50%)}
+.in>.frame::before{animation:frameOpen 2.2s .1s cubic-bezier(.7,0,.2,1) forwards,frameSpin 8s linear 2.3s infinite}
+.in>.frame::after{animation:frameOpen 2.2s .45s cubic-bezier(.7,0,.2,1) forwards}
+@keyframes frameOpen{to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes frameSpin{to{--ang:360deg}}
+/* corner ornaments */
+.cn{position:absolute;width:54px;height:54px;opacity:0;transform:scale(.5)}
+.cn svg{width:100%;height:100%;fill:none;stroke:var(--l1);stroke-width:1.6}
+.cn circle,.cn path:last-child{fill:var(--l2);stroke:none}
+.cn.tl{top:-4px;left:-4px}.cn.tr{top:-4px;right:-4px}.cn.bl{bottom:-4px;left:-4px}.cn.br{bottom:-4px;right:-4px}
+.cn.tr svg{transform:scaleX(-1)}.cn.bl svg{transform:scaleY(-1)}.cn.br svg{transform:scale(-1,-1)}
+.in>.frame .cn{animation:corner 1.2s 1.8s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes corner{to{opacity:1;transform:none}}
+
+/* ---- gold dust ---- */
+.dust{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.dust i{position:absolute;bottom:-14px;border-radius:50%;background:radial-gradient(circle,#f8e9b8,rgba(217,189,122,0) 70%);opacity:0;animation:dustUp linear infinite}
+@keyframes dustUp{10%{opacity:.9}90%{opacity:.5}100%{transform:translate(var(--sx),-110vh);opacity:0}}
+
+/* ---- heading ---- */
+.royal-header{width:100%;max-width:760px;margin:0 auto}
+.royal-overline,.royal-section-label,.family-eyebrow,.royal-signature>span,.royal-footer>span,.couple-caption{
+  font-family:"Cormorant Garamond",Georgia,serif;font-size:12px;font-weight:600;letter-spacing:.38em;line-height:1.9;color:var(--g1)}
+.royal-flourish{margin:8px 0 4px;color:var(--g1);font-size:26px;line-height:1}
+.royal-flourish span{display:inline-block;padding:0 10px;font-size:13px;vertical-align:middle;animation:twinkle 2.6s ease-in-out infinite}
+@keyframes twinkle{50%{transform:scale(1.5) rotate(45deg);opacity:.6}}
+.royal-main-heading{margin:0;font-family:"Great Vibes","Brush Script MT",cursive;font-weight:400;font-size:clamp(52px,13vw,88px);line-height:1.1;padding:.1em .1em .2em}
+.royal-intro{margin:6px auto 0;max-width:420px;font-size:18px;font-style:italic;line-height:1.7;color:rgba(252,248,240,.82)}
+
+.couple-names{margin:38px 0 0;display:flex;flex-direction:column;align-items:center;gap:2px}
+.couple-name{font-family:"Great Vibes",cursive;font-size:clamp(46px,12vw,74px);line-height:1.15;padding:.05em .1em .15em}
+.couple-ampersand{position:relative;width:64px;height:64px;display:grid;place-items:center;margin:4px 0}
+.couple-ampersand::before{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px dashed var(--g1);animation:spin 18s linear infinite}
+.couple-ampersand::after{content:"";position:absolute;inset:7px;border-radius:50%;border:1px solid rgba(217,189,122,.5)}
+.couple-ampersand b{font-family:"Great Vibes",cursive;font-weight:400;font-size:34px;color:var(--g2);line-height:1}
+@keyframes spin{to{transform:rotate(360deg)}}
+.couple-caption{margin:14px 0 0;font-size:11px;letter-spacing:.34em}
+
+/* ---- venue arch ---- */
+.royal-venue{position:relative;width:min(100%,520px);margin:clamp(22px,4vw,34px) auto 0;padding:clamp(44px,10vw,64px) 24px 34px;
+  border-radius:200px 200px 26px 26px;border:1px solid rgba(217,189,122,.7);
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.015));box-shadow:0 30px 60px rgba(0,0,0,.35),inset 0 0 60px rgba(217,189,122,.07)}
+.royal-venue::before{content:"";position:absolute;inset:9px;border-radius:192px 192px 18px 18px;border:1px solid rgba(217,189,122,.25);pointer-events:none}
+.venue-title{margin:8px 0 0;font-family:"Great Vibes",cursive;font-weight:400;font-size:clamp(54px,15vw,92px);line-height:1.1;padding:.05em .1em .15em;overflow-wrap:anywhere}
+.venue-title em{font-style:normal}
+.royal-rule{display:flex;align-items:center;justify-content:center;gap:13px;margin:6px auto 16px;color:var(--g1)}
+.royal-rule span{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--g1))}
+.royal-rule span:last-child{transform:scaleX(-1)}.royal-rule i{font-size:12px;font-style:normal}
+.pin{position:relative;display:inline-grid;place-items:center;width:46px;height:46px;margin-bottom:8px}
+.pin svg{width:26px;height:34px;fill:var(--g1);animation:bob 2.4s ease-in-out infinite}
+.pin svg circle{fill:var(--wine)}
+.pin::before,.pin::after{content:"";position:absolute;bottom:2px;width:30px;height:10px;border-radius:50%;border:1.5px solid var(--g1);opacity:0;animation:ripple 2.4s ease-out infinite}
+.pin::after{animation-delay:1.2s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@keyframes ripple{0%{transform:scale(.4);opacity:.9}100%{transform:scale(2);opacity:0}}
+.royal-landmark{margin:0;font-size:21px;font-weight:600;letter-spacing:.04em;line-height:1.5;color:var(--ivory)}
+.royal-address{margin:4px 0 0;font-size:17px;font-style:italic;letter-spacing:.06em;color:rgba(252,248,240,.75)}
+.royal-address span{padding:0 6px;color:var(--g1)}
+.royal-map-link{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:20px;min-height:50px;margin-top:20px;padding:0 26px;
+  color:#3a0c18;background:linear-gradient(135deg,#a67c37,#f3dc9d 50%,#b8924f);border-radius:40px;text-decoration:none;box-shadow:0 8px 24px rgba(166,124,55,.45);transition:transform .25s,box-shadow .25s}
+.royal-map-link>span:first-child{font-size:12px;font-weight:700;letter-spacing:.24em}
+.royal-map-arrow{font-size:19px;transition:transform .25s}
+.royal-map-link::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:sweep 3.6s ease-in-out 2s infinite}
+@keyframes sweep{0%{left:-60%}40%,100%{left:130%}}
+.royal-map-link:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(166,124,55,.6)}
+.royal-map-link:hover .royal-map-arrow{transform:translate(3px,-3px)}
+
+/* ---- family card ---- */
+.royal-family{position:relative;width:min(100%,640px);margin:clamp(22px,4vw,34px) auto 0;padding:clamp(34px,7vw,52px) 26px 34px;color:var(--ink);
+  background:radial-gradient(ellipse at 50% 0%,rgba(217,189,122,.28),transparent 62%),var(--ivory);box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.royal-family .family-eyebrow,.royal-family .royal-signature>span{color:var(--g3)}
+.family-top-ornament{display:block;margin-bottom:6px;color:var(--g3);font-size:36px;line-height:1}
+.family-heading{margin:10px auto 0;font-family:"Great Vibes",cursive;font-weight:400;font-size:clamp(42px,10.5vw,64px);line-height:1.2;color:var(--rose)}
+.family-heading em{font-style:normal;color:var(--g3);background:linear-gradient(100deg,#a67c37 30%,#e8cd8a 50%,#a67c37 70%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
+.royal-family-message{max-width:460px;margin:14px auto 0;font-size:19px;line-height:1.75;color:var(--muted)}
+.royal-signature{margin-top:22px}
+.royal-signature p{margin:6px 0 0;font-family:"Great Vibes",cursive;font-size:clamp(46px,11vw,62px);line-height:1.2;color:var(--rose)}
+.signature-rule{width:70px;height:1px;margin:10px auto 0;background:linear-gradient(90deg,transparent,var(--g3),transparent)}
+.family-bottom-ornament{display:block;margin-top:14px;color:var(--g3);font-size:14px;animation:twinkle 3s ease-in-out infinite}
+.royal-footer{padding:20px 0 0;text-align:center}
+.royal-footer>span{font-size:11px;letter-spacing:.3em;color:rgba(217,189,122,.8)}
+
+@media (max-width:600px){.desktop-break{display:none}.royal-invite{padding-left:20px;padding-right:20px}.frame{inset:8px}.cn{width:36px;height:36px}.royal-intro{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1}.in .rv,.in .gold-text,.royal-map-link::after,.dust i,.pin svg,.pin::before,.pin::after,.couple-ampersand::before{animation:none!important}
+  .frame::before,.frame::after{animation:none!important;opacity:1!important;clip-path:none!important}.cn{opacity:1!important;transform:none!important;animation:none!important}}
