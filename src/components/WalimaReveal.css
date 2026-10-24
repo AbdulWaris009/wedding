@@ -247,11 +247,16 @@
   height: 100%;
   cursor: crosshair;
   touch-action: none;
-  transition: opacity .5s ease;
+  transition:
+    opacity 1s cubic-bezier(.22, .61, .36, 1),
+    transform 1s cubic-bezier(.22, .61, .36, 1),
+    filter 1s cubic-bezier(.22, .61, .36, 1);
 }
 
 .scratch-window.is-revealed .scratch-canvas {
   opacity: 0;
+  transform: scale(1.08);
+  filter: blur(8px);
   pointer-events: none;
 }
 
@@ -473,4 +478,85 @@
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+.scratch-window {
+  transition: box-shadow .9s ease;
+}
+
+.scratch-window.is-revealed {
+  box-shadow:
+    0 0 0 4px #d4b06830,
+    0 0 40px #d4b06870,
+    0 8px 28px #0004;
+}
+
+/* gold dust layer */
+.scratch-dust {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* shine sweep on reveal */
+.scratch-shine {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    #fff7d8b0 50%,
+    transparent 65%
+  );
+  opacity: 0;
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.scratch-window.is-revealed .scratch-shine {
+  animation: scratch-shine 1.4s .2s ease-out both;
+}
+
+@keyframes scratch-shine {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateX(120%);  opacity: 0; }
+}
+
+/* underlay settles in smoothly */
+.scratch-underlay {
+  transform: scale(1.04);
+  transition: transform 1.4s cubic-bezier(.22, .61, .36, 1);
+}
+
+.scratch-window.is-revealed .scratch-underlay {
+  transform: scale(1);
+}
+
+.scratch-window.is-revealed .scratch-underlay > span,
+.scratch-window.is-revealed .scratch-underlay > strong {
+  animation: walima-rise .8s cubic-bezier(.22, .61, .36, 1) both;
+}
+
+.scratch-window.is-revealed .scratch-underlay > span:nth-child(1) { animation-delay: .15s; }
+.scratch-window.is-revealed .scratch-underlay > strong {
+  animation-name: walima-date-pop;
+  animation-duration: 1s;
+  animation-delay: .25s;
+  animation-timing-function: cubic-bezier(.34, 1.56, .64, 1);
+}
+.scratch-window.is-revealed .scratch-underlay > span:nth-child(3) { animation-delay: .5s; }
+.scratch-window.is-revealed .scratch-underlay > span:nth-child(4) { animation-delay: .65s; }
+
+@keyframes walima-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes walima-date-pop {
+  from { opacity: 0; transform: scale(.6); }
+  to   { opacity: 1; transform: scale(1); }
 }
