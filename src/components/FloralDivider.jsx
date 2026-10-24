@@ -1,5 +1,5 @@
 import { useEffect, useId, useMemo, useRef } from "react";
-import "./FloralDivider.css";
+import "./Floraldivider.css";
 
 /* ---------- theme colours (burgundy / red / blush + gold) ---------- */
 const TONES = {
